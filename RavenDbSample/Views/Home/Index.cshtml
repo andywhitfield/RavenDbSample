@@ -1,0 +1,21 @@
+﻿@model RavenDbSample.Models.Home.IndexViewModel
+<h2>RavenDB Sample</h2>
+
+<strong>All Products:</strong>
+@if (Model.Products.Any()) {
+<ul>
+    @foreach (var product in Model.Products) {
+        <li><a href="@Url.Action("productdetails")/@product.Id/@product.NameForUrl">@product.Name</a> : @product.QuantityInStock available</li>
+    }
+</ul>
+} else {
+    <p><i>No products available.</i></p>
+}
+
+<form method="post" action="@Url.Action("addproduct")">
+    <fieldset>
+        <legend><strong>Add Product:</strong></legend>
+        <div><label for="productName">Name: </label> <input type="text" name="productName" id="productName" /></div>
+        <div><input type="submit" value="Add" /></div>
+    </fieldset>
+</form>

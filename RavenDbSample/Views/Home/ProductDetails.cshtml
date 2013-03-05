@@ -1,0 +1,37 @@
+﻿@model RavenDbSample.Models.Home.ProductDetailsViewModel
+<h2>RavenDB Sample : Product Details</h2>
+
+<div><strong>@Model.Product.Name</strong> [<i>@Model.Product.Id</i>]</div>
+<div>Quantity available: @Model.Product.QuantityInStock</div>
+
+@if (Model.Product.QuantityInStock > 0) {
+<div>
+<form action="@Url.Action("buyproduct")" method="post">
+    Order this product. Quantity:
+    <input type="number" min="1" name="qty" value="1" />
+    <input type="submit" value="BUY" />
+    <input type="hidden" name="productId" value="@Model.Product.Id" />
+</form>
+</div>
+}
+
+<div>
+<form action="@Url.Action("restockproduct")" method="post">
+    Re-stock this product. Quantity:
+    <input type="number" min="1" max="100" name="qty" value="10" />
+    <input type="submit" value="RE-STOCK" />
+    <input type="hidden" name="productId" value="@Model.Product.Id" />
+</form>
+</div>
+
+<div>
+<form action="@Url.Action("deleteproduct")" method="post">
+    Delete this product?
+    <input type="submit" value="Yes, DELETE" />
+    <input type="hidden" name="productId" value="@Model.Product.Id" />
+</form>
+</div>
+
+<p>
+<a href="@Url.Action("index")">\\ back to all products \\</a>
+</p>
